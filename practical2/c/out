@@ -1,0 +1,13 @@
+         1 #include<stdio.h>
+         2 
+         3 #define PI 3.1415
+         4 
+         5 main() {
+         6     int i, j;
+         7     i = 5;
+         8     for (j=0; j<i*i; j++){
+         9         j = i+j;
+        10     }
+        11     int jarvis = PI * i * j;
+        12     printf("%d", jarvis);
+        13 }
