@@ -1,7 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Journal Article
 % Compiler Design
-% Practical 1: Speeding up performance with openmp
 %
 % Gahan M. Saraiya
 % 18MCEC10
@@ -14,7 +13,6 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage[utf8]{inputenc}
-\usepackage{xcolor}
 \usepackage{float}
 \usepackage{lipsum} % Package to generate dummy text throughout this template
 \usepackage{blindtext}
@@ -39,20 +37,55 @@
 \renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
 \usepackage{titlesec} % Allows customization of titles
 
-%Importing csv as table
-\usepackage{csvsimple}
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
+
+\date{}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdfauthor={Gahan Saraiya},
+	pdfcreator={Gahan Saraiya},
+	pdfproducer={Gahan Saraiya},
+}
 
 \usepackage{makecell}
 \usepackage{longtable}
-\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
-\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
-%----------------------------------------------------------------------------------------
-%       DATE FORMAT
-%----------------------------------------------------------------------------------------
-\usepackage{datetime}
-\newdateformat{monthyeardate}{\monthname[\THEMONTH], \THEYEAR}
-%----------------------------------------------------------------------------------------
 
+\newcommand*\tick{\item[\Checkmark]}
+\newcommand*\good{\CheckmarkBold}
+\newcommand*\arrow{\item[$\Rightarrow$]}
+\newcommand*\fail{\item[\XSolidBrush]}
+\newcommand*\bad{\XSolidBrush}
+\usepackage{minted} % for highlighting code sytax
+\usepackage{xcolor} % for highlighting code sytax
+\definecolor{LightGray}{gray}{0.9}
+
+\setminted[text]{
+	frame=lines, 
+	breaklines,
+	baselinestretch=1.2,
+	bgcolor=LightGray,
+	%	fontsize=\small
+}
+\setminted[sql]{
+	frame=lines, 
+	breaklines,
+	baselinestretch=1.2,
+	bgcolor=LightGray,
+	%	fontsize=\small
+}
+
+\setminted[python]{
+	frame=lines, 
+	breaklines, 
+	linenos,
+	baselinestretch=1.2,
+	%	bgcolor=LightGray,
+	%	fontsize=\small
+}
 \titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
 \titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
@@ -60,17 +93,22 @@
 \pagestyle{fancy} % All pages have headers and footers
 \fancyhead{} % Blank out the default header
 \fancyfoot{} % Blank out the default footer
-
+%----------------------------------------------------------------------------------------
+%       DATE FORMAT
+%----------------------------------------------------------------------------------------
+\usepackage{datetime}
+\newdateformat{monthyeardate}{\monthname[\THEMONTH], \THEYEAR}
+%----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
 %       TITLE SECTION
 %----------------------------------------------------------------------------------------
 \title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{Practical 1: List of the compiler Designer tools and write its comparative analysis}} % Article title
 \author{
-\large
-{\textsc{Gahan Saraiya (18MCEC10)}}\\[2mm]
-%\thanks{A thank you or further information}\\ % Your name
-\normalsize \href{mailto:18mcec10@nirmauni.ac.in}{18mcec10@nirmauni.ac.in}\\[2mm] % Your email address
+	\large
+	{\textsc{Gahan Saraiya (18MCEC10)}}\\[2mm]
+	%\thanks{A thank you or further information}\\ % Your name
+	\normalsize \href{mailto:18mcec10@nirmauni.ac.in}{18mcec10@nirmauni.ac.in}\\[2mm] % Your email address
 }
 \date{}
 \hypersetup{
@@ -95,46 +133,61 @@
 \fancyfoot[RO,LE]{Page \thepage} % Custom footer text
 %----------------------------------------------------------------------------------------
 
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{fourier} 
-\usepackage{array}
-\usepackage{makecell}
-
-\renewcommand\theadalign{bc}
-\renewcommand\theadfont{\bfseries}
-\renewcommand\theadgape{\Gape[4pt]}
-\renewcommand\cellgape{\Gape[4pt]}
-\newcommand*\tick{\item[\Checkmark]}
-\newcommand*\arrow{\item[$\Rightarrow$]}
-\newcommand*\fail{\item[\XSolidBrush]}
-\usepackage{minted} % for highlighting code sytax
-\definecolor{LightGray}{gray}{0.9}
-
-\setminted[text]{
-	frame=lines, 
-	breaklines,
-	baselinestretch=1.2,
-	bgcolor=LightGray,
-%	fontsize=\small
-}
-
-\setminted[python]{
-	frame=lines, 
-	breaklines, 
-	linenos,
-	baselinestretch=1.2,
-%	bgcolor=LightGray,
-%	fontsize=\small
-}
 
 \begin{document}
 \maketitle % Insert title
 \thispagestyle{fancy} % All pages have headers and footers
 
-\section{AIM}
-List of the compiler Designer tools and write its comparative analysis.
+\section{Introduction}\label{sec:introduction}
+Aim of this practical to perform comparison of compiler design tool.
+\begin{itemize}
+	\item A compiler is a computer program which helps you transform source code written in a high-level language into low-level machine language.
+	\item Correctness, speed of compilation, preserve the correct the meaning of the code are some important features of compiler design
+	\item Compilers are divided into three parts 1) Single Pass Compilers 2)Two Pass Compilers, and 3) Multipass Compilers
+	\item Important compiler construction tools are 1) Scanner generators, 2)Syntax-3) directed translation engines, 4) Parser generators, 5) Automatic code generators
+	\item The main task of the compiler is to verify the entire program, so there are no syntax or semantic errors
+\end{itemize}
+
+Below are few examples of compiler designer tools:
+\begin{itemize}
+	\item LEX
+	\item Yacc
+	\item Parser Generators
+	\item Scanner Generators
+	\item Syntax Directed Translation engines
+\end{itemize}
+
+\renewcommand\arraystretch{2}
+\begin{longtable}{p{7cm} | p{7cm}}
+	\caption{Comparative study of LEX and Yacc}
+	\\
+	\textbf{LEX} & \textbf{Yacc}
+	\\ \hline
+	LEX is lexical analyzer that breaks up an input  stream into usable elements called TOKENS.
+	& YACC is a parsing tool that verifies the syntax of input and analyzes the structure.
+	\\ \hline
+	It deals with tokens
+	& It deals with association and precedence.
+	\\ \hline
+	It consists of set 0 regular expressions.
+	& It consists of commands like LALR.
+	\\ \hline
+	
+	Lex is a tool for generating scanners. Scanners are programs that recognize lexical patterns in text.
+	& Yacc stands for Yet Another Compiler Compiler.It is a tool that translates any grammar that describes a language into a parser for that language. 
+	
+	\\ \hline
+	
+	These lexical patterns (or regular expressions) are defined in a particular syntax. A matched regular expression may have an amciated action
+	& It is written in Backus Naur form (BNF).The GNU equivalent of Yacc is called Bison. 
+	
+	\\ \hline
+	
+	This action may also include returning a token. 
+	& 
+	To clarify this concept a bit further, let's take the English language for an example. The set of tokens might be: noun, verb, adjective, and so on. 
+	
+	\\ \hline
+\end{longtable}
 
 \end{document}
-
