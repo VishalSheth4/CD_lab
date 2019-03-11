@@ -1,19 +1,15 @@
 %{
-    #include<stdio.h>
+#include<stdio.h>
+int num=0;
 %}
-
 %%
-\<[^>]*\> fprintf(yyout,"%s\n",yytext);
-.|\n; 
+[0-9] num++;
 %%
-
-int yywrap() {
-    return 1;
+int main(void) {
+yyin= fopen("f.in","r");
+yylex();
+printf("\nTotal Numbers in the files: %d\n",num);
 }
-
-int main() {
-    yyin=fopen("index.html","r");
-    yyout=fopen("output.txt","w");
-    yylex();
-    return 0;
+int yywrap(void) {
+return 1;
 }
