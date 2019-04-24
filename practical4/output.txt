@@ -1,0 +1,16 @@
+Enter the no of productions:2
+Enter the productions:ab cd ed
+
+Enter the first values:
+First value(a):First value(c):20 30
+
+Enter the follow values:
+Follow value(a):Follow value(c):10 20
+LL1 Table
+
+        e       d       2       0       3       1
+
+a
+
+c
+The given grammar is LL1

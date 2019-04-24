@@ -1,0 +1,13 @@
+char tt
+SYNTAX ERROR
+float gg;
+char dd,ff;
+int ll;
+FLOAT - gg
+CHAR - dd
+CHAR - ff
+INT - ll
+oijfp
+int xx;
+float xx;
+MULTIPLE DECLARATION OF xx

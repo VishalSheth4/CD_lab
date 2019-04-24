@@ -1,0 +1,4 @@
+temp1=i1+i2
+temp2=temp1-i3
+temp3=temp2+i4
+ans=temp3
